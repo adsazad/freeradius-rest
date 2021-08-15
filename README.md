@@ -7,6 +7,7 @@ https://localhost:8080/user/create
 ```
 Method: `POST`
 |Attributes|Description|
+|----------|------------|
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
 |radusername | Username for user you are creating|
