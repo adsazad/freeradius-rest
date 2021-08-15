@@ -1,6 +1,48 @@
 var dbr = require('./database');
 
-exports.addCheckAttribute = function (username, attribute, op, value) {
+exports.getUserCheckAttributes = function (username) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                db.query('SELECT * FROM radcheck WHERE username = ?', [username], function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        db.end();
+                        resolve(rows);
+                    }
+                });
+            }
+        });
+    });
+}
+exports.getUserPassword = function (username) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                db.query('SELECT * FROM radcheck WHERE username = ? AND attribute = ?', [username, "Cleartext-Password"], function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        db.end();
+                        if(rows.length > 0){
+                            resolve(rows[0].value);
+                        }
+                        resolve("");
+                    }
+                });
+            }
+        });
+    });
+}
+
+exports.addUserCheckAttribute = function (username, attribute, op, value) {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();
         db.connect(function (err) {

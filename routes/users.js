@@ -4,8 +4,32 @@ var auth = require('../modules/auth');
 var db = require('../modules/database');
 var radius = require('../modules/radius');
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+router.get('/', async function (req, res, next) {
+  var adminuser = await auth.chAuth(req, res);
+  var con = db.getConnect();
+  con.connect(function (err) {
+    if (err) {
+      throw err;
+    }
+    con.query('SELECT * FROM userinfo', async function (err, rows) {
+      if (err) {
+        throw err;
+      }
+      var resData = [];
+      await Promise.all(rows.map(async function (row) {
+        var checkAttr = await radius.getUserCheckAttributes(row.username);
+        var password = await radius.getUserPassword(row.username);
+        var d = {
+          id: row.id,
+          username: row.username,
+          password: password,
+          checkAttr: JSON.parse(JSON.stringify(checkAttr)),
+        };
+        resData.push(d);
+      }));
+      res.json(resData);
+    });
+  });
 });
 
 router.post("/create", async function (req, res, next) {
@@ -31,7 +55,7 @@ router.post("/create", async function (req, res, next) {
           }
           if (inresult) {
             console.log("User created successfully");
-            radius.addCheckAttribute(cusername, "Cleartext-Password", ":=", cpassword);
+            radius.addUserCheckAttribute(cusername, "Cleartext-Password", ":=", cpassword);
             res.json({
               status: "success",
               message: "User created successfully",
