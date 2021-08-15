@@ -6,7 +6,7 @@
 ```
 https://localhost:8080/user
 ```
-Method: `Post`
+Method: `GET`
 |Attributes|Description|
 |----------|------------|
 |authusername| Daloradius username|
