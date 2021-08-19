@@ -24,6 +24,8 @@ Method: `POST`
 |radusername | Username for user you are creating|
 |radpassword| Password for user you are creating|
 
+## Profiles
+
 ### List UserGroups
 ```
 https://localhost:8080/usergroup
