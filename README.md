@@ -24,6 +24,8 @@ Method: `POST`
 |radusername | Username for user you are creating|
 |radpassword| Password for user you are creating|
 
+## Profiles
+
 ### List UserGroups
 ```
 https://localhost:8080/usergroup
@@ -56,3 +58,15 @@ Method: `POST`
 |----------|------------|
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
+
+### Add Ip Pool
+```
+https://localhost:8080/ippools
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+|poolName| Pool Name|
+|framedIpAddress| Ip address for pool|
