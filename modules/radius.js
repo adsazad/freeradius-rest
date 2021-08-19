@@ -124,6 +124,44 @@ exports.getUserGroups = function () {
     });
 }
 
+
+
+exports.getUserGroupCheckAttributes = function (groupname) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var q = 'SELECT * FROM radgroupcheck WHERE groupname = ?';
+                db.query(q, [groupname], function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
+exports.getUserGroupReplyAttributes = function (groupname) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            }
+            var q = 'SELECT * FROM radgroupreply WHERE groupname = ?';
+            db.query(q, [groupname], function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(rows);
+            });
+        });
+    });
+}
+
 exports.getUserGroupRadCheck = function () {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();
