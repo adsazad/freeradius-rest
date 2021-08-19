@@ -1,4 +1,4 @@
-# Restful api for freeradius under-development
+# REST API for freeradius under-development
 
 ## User
 
