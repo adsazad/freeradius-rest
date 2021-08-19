@@ -2,6 +2,16 @@
 
 ## User
 
+### List User
+```
+https://localhost:8080/user
+```
+Method: `GET`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+
 ### Create User
 ```
 https://localhost:8080/user/create
