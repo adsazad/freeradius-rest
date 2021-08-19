@@ -44,3 +44,15 @@ Method: `POST`
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
 |usergroup| Name of UserGroup you want to get attributes of|
+
+## IP Pool
+
+### List IP Pools
+```
+https://localhost:8080/ippools
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
