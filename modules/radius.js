@@ -230,7 +230,6 @@ exports.getNas = function () {
                     if (err) {
                         reject(err);
                     }
-                    console.log(rows);
                     resolve(rows);
                 });
             }
