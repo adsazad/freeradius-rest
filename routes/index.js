@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usersRouter = require('./users');
 var userGroupRouter = require('./usergroup');
-
+var ippools = require('./ippools');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -15,6 +15,8 @@ router.get('/', function(req, res, next) {
 
 router.use('/user', usersRouter);
 router.use('/usergroup', userGroupRouter);
+router.use('/ippools', ippools);
+
 
 
 module.exports = router;

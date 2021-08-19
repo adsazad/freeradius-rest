@@ -59,7 +59,7 @@ router.post("/create", async function (req, res, next) {
             res.json({
               status: "success",
               message: "User created successfully",
-              additional: inresult,
+              data: inresult,
             });
             res.end();
           } else {

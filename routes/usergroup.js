@@ -12,7 +12,7 @@ router.post("/", async function (req, res, next) {
             throw err;
         }
         var usergroup = await radius.getUserGroups();
-        res.json({ "status": "success", "message": "User group created", "additional": usergroup });
+        res.json({ "status": "success", "message": "User group created", "data": usergroup });
     });
     // res.json({});
 });
@@ -33,7 +33,7 @@ router.post("/attributes", async function (req, res, next) {
             var resGroups = {};
             resGroups["checkAttributes"] = chattr;
             resGroups["replyAttributes"] = rpattr;
-            res.json({ "status": "success", "message": "User group created", "additional": resGroups });
+            res.json({ "status": "success", "message": "User group created", "data": resGroups });
             res.end();
         });
     }

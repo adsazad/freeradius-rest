@@ -198,3 +198,22 @@ exports.getUserGroupRadReply = function () {
         });
     });
 }
+
+exports.getIpPools = function () {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM radippool";
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
