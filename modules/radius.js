@@ -19,6 +19,28 @@ exports.getUserCheckAttributes = function (username) {
         });
     });
 }
+exports.getUserGroupReplyAttributes = function (groupname) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            }
+            var q = 'SELECT * FROM radgroupreply WHERE groupname = ?';
+            db.query(q, [groupname], function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                var d = [];
+                rows.map(function (row) {
+                    d.push(row.attribute);
+                });
+                resolve(d);
+            });
+        });
+    });
+}
+
 exports.getUserPassword = function (username) {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();
@@ -31,7 +53,7 @@ exports.getUserPassword = function (username) {
                         reject(err);
                     } else {
                         db.end();
-                        if(rows.length > 0){
+                        if (rows.length > 0) {
                             resolve(rows[0].value);
                         }
                         resolve("");
@@ -72,6 +94,69 @@ exports.addUserCheckAttribute = function (username, attribute, op, value) {
                     });
                 }
             });
+        });
+    });
+}
+
+exports.getUserGroups = function () {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(async function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var ch = await exports.getUserGroupRadCheck();
+                var rp = await exports.getUserGroupRadReply();
+                var groups = [];
+                for (var i = 0; i < ch.length; i++) {
+                    if (!groups.includes(ch[i].groupname)) {
+                        groups.push(ch[i].groupname);
+                    }
+                }
+                for (var i = 0; i < rp.length; i++) {
+                    if (!groups.includes(rp[i].groupname)) {
+                        groups.push(rp[i].groupname);
+                    }
+                }
+                resolve(groups);
+            }
+        });
+    });
+}
+
+exports.getUserGroupRadCheck = function () {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM radgroupcheck";
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
+exports.getUserGroupRadReply = function () {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM radgroupreply";
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
         });
     });
 }

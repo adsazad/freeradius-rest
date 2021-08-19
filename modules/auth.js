@@ -6,7 +6,7 @@ exports.chAuth = async function (req, res) {
             // send json response
             res.json({
                 status: 'error',
-                message: 'Username is required'
+                message: 'Authentication username is required'
             });
             res.end();
         }
@@ -14,7 +14,7 @@ exports.chAuth = async function (req, res) {
             // send json response
             res.json({
                 status: 'error',
-                message: 'Password is required'
+                message: 'Authentication password is required'
             });
             res.end();
 
