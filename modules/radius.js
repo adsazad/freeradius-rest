@@ -217,3 +217,23 @@ exports.getIpPools = function () {
         });
     });
 }
+
+exports.getNas = function () {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM nas";
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    console.log(rows);
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
