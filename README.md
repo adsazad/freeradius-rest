@@ -82,3 +82,18 @@ Method: `POST`
 |----------|------------|
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
+
+### Create NAS
+```
+https://localhost:8080/nas/create
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+| nasname | IP Address of nas|
+|secret| Secret|
+| shortname| Short Name for the nas|
+|type| Type attr for nas|
+|ports| Ports for nas|
