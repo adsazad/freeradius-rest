@@ -33,3 +33,14 @@ Method: `POST`
 |----------|------------|
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
+
+### Get UserGroup Check And Reply Attributes
+```
+https://localhost:8080/usergroup/attributes
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+|usergroup| Name of UserGroup you want to get attributes of|
