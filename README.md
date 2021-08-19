@@ -70,3 +70,15 @@ Method: `POST`
 |authpassword| Daloradius password|
 |poolName| Pool Name|
 |framedIpAddress| Ip address for pool|
+
+## NAS
+
+### List NAS
+```
+https://localhost:8080/nas
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
