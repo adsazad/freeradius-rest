@@ -21,4 +21,26 @@ router.post('/', async function (req, res) {
     res.end();
 });
 
+router.post('/add', async function (req, res) {
+    var adminuser = await auth.chAuth(req, res);
+    var con = db.getConnect();
+    con.connect(function (err) {
+        if (err) {
+            res.json({ status: 'error', message: "Error connecting to DB" });
+        }
+        var poolName = req.body.poolName;
+        var framedIpAddress = req.body.framedIpAddress;
+        var query = "INSERT INTO radippool (pool_name, framedipaddress,calledstationid,callingstationid,pool_key) VALUES ('" + poolName + "', '" + framedIpAddress + "','','','')";
+        con.query(query, function (err, rows, fields) {
+            if (err) {
+                console.log(err);
+                res.json({ status: 'error', message: "Error adding IP Pool" });
+            } else {
+                res.json({ status: 'success', message: "IP Pool Added" });
+            }
+            con.end();
+        });
+    });
+});
+
 module.exports = router;
