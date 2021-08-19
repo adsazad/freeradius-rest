@@ -58,3 +58,15 @@ Method: `POST`
 |----------|------------|
 |authusername| Daloradius username|
 |authpassword| Daloradius password|
+
+### Add Ip Pool
+```
+https://localhost:8080/ippools
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+|poolName| Pool Name|
+|framedIpAddress| Ip address for pool|
