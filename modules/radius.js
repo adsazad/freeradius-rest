@@ -72,24 +72,35 @@ exports.editUserCheckAttribute = function (username, attribute, op, value) {
             if (err) {
                 reject(err);
             } else {
-                var query = "SELECT * FROM `radcheck` WHERE `username` = '" + username + "' AND `attribute` = '" + attribute + "'";
-                console.log(query);
-                db.query(query, function (err, rows) {
+                // check user exist or not 
+                var checkUserQuery = "SELECT * FROM userinfo WHERE username = '" + username + "'";
+                db.query(checkUserQuery, function (err, rows) {
                     if (err) {
                         reject(err);
                     } else {
                         if (rows.length > 0) {
-                            db.query('UPDATE radcheck SET op = ?, value = ? WHERE username = ? AND attribute = ?', [op, value, username, attribute], function (err, rows) {
+                            var query = "SELECT * FROM `radcheck` WHERE `username` = '" + username + "' AND `attribute` = '" + attribute + "'";
+                            db.query(query, function (err, rows) {
                                 if (err) {
                                     reject(err);
                                 } else {
-                                    db.end();
-                                    resolve(rows);
+                                    if (rows.length > 0) {
+                                        db.query('UPDATE radcheck SET op = ?, value = ? WHERE username = ? AND attribute = ?', [op, value, username, attribute], function (err, rows) {
+                                            if (err) {
+                                                reject(err);
+                                            } else {
+                                                db.end();
+                                                resolve(rows);
+                                            }
+                                        });
+                                    } else {
+                                        console.log(rows);
+                                        resolve("Attribute not found");
+                                    }
                                 }
                             });
                         } else {
-                            console.log(rows);
-                            resolve("Attribute not found");
+                            resolve("User not found");
                         }
                     }
                 });

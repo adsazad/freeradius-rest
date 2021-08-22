@@ -104,6 +104,11 @@ router.post("/changepassword", async function (req, res, next) {
             "status": "error",
             "message": "Attribute not found"
           });
+        } else if (edres == "User not found") {
+          res.json({
+            "status": "error",
+            "message": "User not found"
+          });
         } else {
           res.json({
             "status": "success",
