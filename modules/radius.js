@@ -64,6 +64,41 @@ exports.getUserPassword = function (username) {
     });
 }
 
+// edit user check attribute
+exports.editUserCheckAttribute = function (username, attribute, op, value) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM `radcheck` WHERE `username` = '" + username + "' AND `attribute` = '" + attribute + "'";
+                console.log(query);
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        if (rows.length > 0) {
+                            db.query('UPDATE radcheck SET op = ?, value = ? WHERE username = ? AND attribute = ?', [op, value, username, attribute], function (err, rows) {
+                                if (err) {
+                                    reject(err);
+                                } else {
+                                    db.end();
+                                    resolve(rows);
+                                }
+                            });
+                        } else {
+                            console.log(rows);
+                            resolve("Attribute not found");
+                        }
+                    }
+                });
+            }
+        });
+    });
+}
+
+
 exports.addUserCheckAttribute = function (username, attribute, op, value) {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();

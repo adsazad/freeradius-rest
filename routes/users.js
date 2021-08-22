@@ -82,4 +82,38 @@ router.post("/create", async function (req, res, next) {
   });
 });
 
+// Change password from username
+router.post("/changepassword", async function (req, res, next) {
+  var adminuser = await auth.chAuth(req, res);
+  var con = db.getConnect();
+  var cusername = req.body.radusername;
+  var cpassword = req.body.radnewpassword;
+  con.connect(function (err) {
+    var checkUserUser = "SELECT * FROM userinfo WHERE username = '" + cusername + "'";
+    con.query(checkUserUser, async function (err, result) {
+      if (result.length == 0) {
+        res.json({
+          "status": "error",
+          "message": "Username does not exist"
+        });
+        res.end();
+      } else {
+        var edres = await radius.editUserCheckAttribute(cusername, "Cleartext-Password", ":=", cpassword);
+        if (edres == "Attribute not found") {
+          res.json({
+            "status": "error",
+            "message": "Attribute not found"
+          });
+        } else {
+          res.json({
+            "status": "success",
+            "message": "Password changed successfully"
+          });
+          res.end();
+        }
+      }
+    });
+  });
+});
+
 module.exports = router;
