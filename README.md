@@ -24,6 +24,19 @@ Method: `POST`
 |radusername | Username for user you are creating|
 |radpassword| Password for user you are creating|
 
+### Change User Password
+```
+https://localhost:8080/user/changepassword
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+|radusername | Username for user you are creating|
+|radnewpassword| Password for user you are creating|
+
+
 ## Profiles
 
 ### List UserGroups
