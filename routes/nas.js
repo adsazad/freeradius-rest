@@ -45,5 +45,39 @@ router.post('/create', async function (req, res) {
     });
 });
 
+// delete nas
+router.post('/delete', async function (req, res) {
+    var adminuser = await auth.chAuth(req, res);
+    var con = db.getConnect();
+    var nasname = req.body.nasname;
+    con.connect(function (err) {
+        // check if nas exist or not
+        var sql = "SELECT * FROM nas WHERE nasname = '" + nasname + "'";
+        con.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.json({ status: 'error', message: 'Error in query' });
+            } else {
+                if (result.length > 0) {
+                    var sql = "DELETE FROM nas WHERE nasname = '" + nasname + "'";
+                    con.query(sql, function (err, result) {
+                        if (err) {
+                            console.log(err);
+                            res.json({ status: 'error', message: 'Error in query' });
+                        } else {
+                            res.json({ status: 'success', message: 'Data Deleted' });
+                        }
+                        con.end();
+                    });
+                } else {
+                    res.json({ status: 'error', message: 'Nas not found' });
+                }
+            }
+        });
+    });
+});
+
+
+
 
 module.exports = router;
