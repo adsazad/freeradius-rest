@@ -110,3 +110,14 @@ Method: `POST`
 | shortname| Short Name for the nas|
 |type| Type attr for nas|
 |ports| Ports for nas|
+
+### Delete NAS
+```
+https://localhost:8080/nas/delete
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|authusername| Daloradius username|
+|authpassword| Daloradius password|
+| nasname | IP Address of nas|
