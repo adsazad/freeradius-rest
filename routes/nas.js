@@ -15,7 +15,7 @@ router.post('/', async function (req, res) {
             secret: nas[i].secret,
             shortName: nas[i].shortname,
             type: nas[i].type,
-            port: nas[i].port,
+            ports: nas[i].ports,
         });
     }
     res.json({ status: 'success', message: "Data Fetched", data: resData });
