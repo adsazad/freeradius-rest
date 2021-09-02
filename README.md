@@ -74,7 +74,7 @@ Method: `POST`
 
 ### Add Ip Pool
 ```
-https://localhost:8080/ippools
+https://localhost:8080/ippools/add
 ```
 Method: `POST`
 |Attributes|Description|
