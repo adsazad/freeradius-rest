@@ -4,7 +4,7 @@ var auth = require('../modules/auth');
 var db = require('../modules/database');
 var radius = require('../modules/radius');
 
-router.post('/', async function (req, res) {
+router.post('/index.json', async function (req, res) {
     var adminuser = await auth.chAuth(req, res);
     var nas = await radius.getNas();
     var resData = [];
