@@ -18,7 +18,7 @@ exports.chAuth = async function (req, res) {
         } else {
             res.json({
                 status: 'error',
-                message: 'Username or password is incorrect'
+                message: 'Secret is incorrect'
             });
             res.end();
         }
