@@ -12,7 +12,7 @@ exports.chAuth = async function (req, res) {
             res.end();
         }
         var secret = req.body.secret;
-        console.log(process.env);
+        // console.log(process.env);
         if (secret == process.env.secret) {
             resolve(true);
         } else {
