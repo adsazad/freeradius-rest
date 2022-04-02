@@ -27,7 +27,7 @@ router.post('/create', async function (req, res) {
     var adminuser = await auth.chAuth(req, res);
     var con = db.getConnect();
     var nasname = req.body.nasname;
-    var secret = req.body.nassecret;
+    var nassecret = req.body.nassecret;
     var shortname = req.body.shortname;
     var type = req.body.type;
     var ports = req.body.ports;
