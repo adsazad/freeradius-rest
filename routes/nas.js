@@ -38,7 +38,7 @@ router.post('/create', async function (req, res) {
                 console.log(err);
                 res.json({ status: 'error', message: 'Error in query' });
             } else {
-                res.json({ status: 'success', message: 'Data Inserted', "data": result });
+                res.json({ status: 'success', message: 'Data Inserted', "data": { "freeradiusId": result.insertId } });
             }
             con.end();
         });
