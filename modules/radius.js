@@ -190,6 +190,24 @@ exports.createUserGroupReplyAttribute = function (groupName, attribute, op, valu
         });
     });
 }
+exports.deleteUserGroupReplyAttribute = function (id) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var q = 'delete from radgroupreply where id = ?';
+                db.query(q, [id], function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
 exports.getUserGroupCheckAttributes = function (groupname) {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();

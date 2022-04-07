@@ -54,5 +54,18 @@ router.post("/create/reply", async function (req, res, next) {
         res.end();
     });
 });
+router.post("/delete/reply", async function (req, res, next) {
+    var adminuser = await auth.chAuth(req, res);
+    var con = db.getConnect();
+    var id = req.body.id;
+    con.connect(async function (err) {
+        if (err) {
+            throw err;
+        }
+        var replyAttributes = await radius.deleteUserGroupReplyAttribute(id);
+        res.json({ "status": "success", "message": "User Group Reply Attribute Deleted", "data": replyAttributes });
+        res.end();
+    });
+});
 
 module.exports = router;
