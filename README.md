@@ -9,8 +9,7 @@ https://localhost:8080/user
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 
 ### Create User
 ```
@@ -19,8 +18,7 @@ https://localhost:8080/user/create
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 |radusername | Username for user you are creating|
 |radpassword| Password for user you are creating|
 
@@ -31,8 +29,7 @@ https://localhost:8080/user/changepassword
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 |radusername | Username for user you are creating|
 |radnewpassword| Password for user you are creating|
 
@@ -46,8 +43,7 @@ https://localhost:8080/usergroup
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 
 ### Get UserGroup Check And Reply Attributes
 ```
@@ -56,8 +52,7 @@ https://localhost:8080/usergroup/attributes
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 |usergroup| Name of UserGroup you want to get attributes of|
 
 ## IP Pool
@@ -69,8 +64,7 @@ https://localhost:8080/ippools
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 
 ### Add Ip Pool
 ```
@@ -79,8 +73,7 @@ https://localhost:8080/ippools/add
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 |poolName| Pool Name|
 |framedIpAddress| Ip address for pool|
 
@@ -93,8 +86,7 @@ https://localhost:8080/nas
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 
 ### Create NAS
 ```
@@ -103,8 +95,7 @@ https://localhost:8080/nas/create
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 | nasname | IP Address of nas|
 |secret| Secret|
 | shortname| Short Name for the nas|
@@ -118,6 +109,5 @@ https://localhost:8080/nas/delete
 Method: `POST`
 |Attributes|Description|
 |----------|------------|
-|authusername| Daloradius username|
-|authpassword| Daloradius password|
+|secret| .env secret|
 | nasname | IP Address of nas|
