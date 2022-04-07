@@ -172,6 +172,24 @@ exports.getUserGroups = function () {
 
 
 
+exports.createUserGroupReplyAttribute = function (groupName, attribute, op, value) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var q = 'INSERT INTO radgroupreply (groupname, attribute, op, value) VALUES (?, ?, ?, ?)';
+                db.query(q, [groupName, attribute, op, value], function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(rows);
+                });
+            }
+        });
+    });
+}
 exports.getUserGroupCheckAttributes = function (groupname) {
     return new Promise(function (resolve, reject) {
         var db = dbr.getConnect();

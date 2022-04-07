@@ -38,5 +38,21 @@ router.post("/attributes", async function (req, res, next) {
         });
     }
 });
+router.post("/create/reply", async function (req, res, next) {
+    var adminuser = await auth.chAuth(req, res);
+    var con = db.getConnect();
+    var groupName = req.body.groupName;
+    var attribute = req.body.attribute;
+    var value = req.body.value;
+    var op = req.body.op;
+    con.connect(async function (err) {
+        if (err) {
+            throw err;
+        }
+        var replyAttributes = await radius.createUserGroupReplyAttribute(groupName, attribute, op, value);
+        res.json({ "status": "success", "message": "User Group Reply Attribute Created", "data": replyAttributes });
+        res.end();
+    });
+});
 
 module.exports = router;
