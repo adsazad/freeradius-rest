@@ -39,14 +39,14 @@ router.post("/create", async function (req, res, next) {
   var cpassword = req.body.radpassword;
   con.connect(function (err) {
     //  create freeradius user sql
-      console.log("User created successfully");
-      radius.addUserCheckAttribute(cusername, "Cleartext-Password", ":=", cpassword);
-      res.json({
-        status: "success",
-        message: "User created successfully",
-        // data: inresult,
-      });
-      res.end();
+    console.log("User created successfully");
+    radius.addUserCheckAttribute(cusername, "Cleartext-Password", ":=", cpassword);
+    res.json({
+      status: "success",
+      message: "User created successfully",
+      // data: inresult,
+    });
+    res.end();
   });
 });
 
@@ -86,6 +86,31 @@ router.post("/changepassword", async function (req, res, next) {
         }
       }
     });
+  });
+});
+
+// Change password from username
+router.post("/assignusergrouptouser", async function (req, res, next) {
+  var adminuser = await auth.chAuth(req, res);
+  var con = db.getConnect();
+  var username = req.body.radusername;
+  var groupname = req.body.groupname;
+  con.connect(function (err) {
+    //  create freeradius user sql
+    try {
+      radius.assignUserGroupToUser(username, groupname);
+    } catch (e) {
+      res.json({
+        "status": "failed",
+        "message": "User group not assigned"
+      });
+    }
+    res.json({
+      status: "success",
+      message: "User group assigned successfully",
+      // data: inresult,
+    });
+    res.end();
   });
 });
 

@@ -33,6 +33,16 @@ Method: `POST`
 |radusername | Username for user you are creating|
 |radnewpassword| Password for user you are creating|
 
+### Assign/Change user group to user
+```
+https://localhost:8080/user/assignusergrouptouser
+```
+Method: `POST`
+|Attributes|Description|
+|----------|------------|
+|secret| .env secret|
+|radusername | Username for user you are creating|
+|groupname| Radius radgroupname |
 
 ## Profiles
 

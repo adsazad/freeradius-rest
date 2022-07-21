@@ -318,3 +318,38 @@ exports.getNas = function () {
         });
     });
 }
+
+exports.assignUserGroupToUser = function (username, groupname) {
+    return new Promise(function (resolve, reject) {
+        var db = dbr.getConnect();
+        db.connect(function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                var query = "SELECT * FROM radusergroup";
+                db.query(query, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    if (rows.length > 0) {
+                        var updateQuery = "UPDATE radusergroup SET groupname = '" + groupname + "' WHERE username = '" + username + "'";
+                        db.query(updateQuery, function (err, rows) {
+                            if (err) {
+                                reject(err);
+                            }
+                            resolve(rows);
+                        });
+                    } else {
+                        var query = "INSERT INTO radusergroup (username, groupname) VALUES ('" + username + "', '" + groupname + "')";
+                        db.query(query, function (err, rows) {
+                            if (err) {
+                                reject(err);
+                            }
+                            resolve(rows);
+                        });
+                    }
+                });
+            }
+        });
+    });
+}
