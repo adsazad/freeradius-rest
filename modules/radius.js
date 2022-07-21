@@ -326,7 +326,7 @@ exports.assignUserGroupToUser = function (username, groupname) {
             if (err) {
                 reject(err);
             } else {
-                var query = "SELECT * FROM radusergroup";
+                var query = "SELECT * FROM radusergroup where username = '" + username + "'";
                 db.query(query, function (err, rows) {
                     if (err) {
                         reject(err);
